@@ -1,0 +1,25 @@
+Maximum Average SubArray I-Sliding window
+class Solution {
+public:
+    double findMaxAverage(vector<int>& nums, int k) {
+        double sum=0;
+        double maxavg=INT_MIN;
+        double maxi=INT_MIN;
+        for(int i=0;i<k;i++)
+        {
+            sum+=nums[i];
+        }
+        maxavg=sum/k;
+        for(int i=k;i<nums.size();i++)
+        {
+            sum+=nums[i];
+            sum-=nums[i-k];
+            maxi=sum/k;
+            if(maxi>maxavg)
+            {
+                maxavg=maxi;
+            }
+        }
+        return maxavg;
+    }
+};
