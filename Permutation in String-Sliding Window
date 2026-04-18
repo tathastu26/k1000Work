@@ -1,0 +1,43 @@
+//Permutation in String-Sliding Window
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        if (s1.length() > s2.length()) return false;
+
+        unordered_map<char, int> target, window;
+
+        for (char c : s1) {
+            target[c]++;
+        }
+
+        int required = target.size();
+        int formed = 0;
+        int left = 0;
+
+        for (int right = 0; right < s2.length(); right++) {
+            char c = s2[right];
+            window[c]++;
+
+            if (target.count(c) && window[c] == target[c]) {
+                formed++;
+            }
+
+            while (right - left + 1 > s1.length()) {
+                char ch = s2[left];
+
+                if (target.count(ch) && window[ch] == target[ch]) {
+                    formed--;
+                }
+
+                window[ch]--;
+                left++;
+            }
+
+            if (formed == required) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+};
