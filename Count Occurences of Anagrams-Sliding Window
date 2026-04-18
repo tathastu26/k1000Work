@@ -1,0 +1,39 @@
+//Count Occurences of Anagrams-Sliding Window
+// User function template for C++
+class Solution {
+  public:
+    int search(string &pat, string &txt) {
+        // code here
+         int k = pat.length();
+        int n = txt.length();
+        int ans=0;
+        
+        if (k > n) return 0;
+
+        vector<int> freqpat(26, 0);
+        vector<int> freqtxt(26, 0);
+        for(char c :pat)
+        {
+            freqpat[c-'a']++;
+        }
+        int left=0;
+        for(int right=0;right<n;right++)
+        {
+            char ch=txt[right];
+            freqtxt[ch -'a']++;
+            if(right-left+1>k)
+            {
+                freqtxt[txt[left] - 'a']--;
+                left++;
+            }
+            if(right-left+1==k)
+            {
+                if(freqpat==freqtxt)
+                {
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+};
