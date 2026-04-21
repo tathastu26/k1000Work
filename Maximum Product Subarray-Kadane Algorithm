@@ -1,0 +1,21 @@
+//Maximum Product Subarray-Kadane Algorithm
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int maxprd=nums[0];
+        int currprdmin=nums[0];
+        int currprdmax=nums[0];
+        for(int i=1;i<nums.size();i++)
+        {
+            if(nums[i]<0)
+            {
+                swap(currprdmax,currprdmin);
+            }
+            currprdmax=max(nums[i],currprdmax*nums[i]);
+            currprdmin=min(nums[i],currprdmin*nums[i]);
+            maxprd=max(maxprd,currprdmax);
+            
+        }
+        return maxprd;
+    }
+};
