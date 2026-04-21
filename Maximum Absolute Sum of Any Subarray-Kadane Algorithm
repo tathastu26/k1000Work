@@ -1,0 +1,22 @@
+//Maximum Absolute Sum of Any Subarray-Kadane Algorithm
+class Solution {
+public:
+    int maxAbsoluteSum(vector<int>& nums) {
+         int currMax = nums[0];
+        int maxsum = nums[0];
+        
+        int currMin = nums[0];
+        int minsum = nums[0];
+
+        for (int i = 1; i < nums.size(); i++) {
+
+            currMax = max(nums[i], currMax + nums[i]);
+            maxsum = max(maxsum, currMax);
+
+            currMin = min(nums[i], currMin + nums[i]);
+            minsum = min(minsum, currMin);
+        }
+
+        return max(abs(maxsum), abs(minsum));
+    }
+};
